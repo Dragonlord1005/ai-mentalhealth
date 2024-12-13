@@ -25,7 +25,8 @@ export async function POST({ request }) {
     const prompt = chatData.messages.map(entry => `${entry.role}: ${entry.content}`).join("\n");
 
     // Call Ollama API with streaming response
-    const ollamaResponse = await fetch('http://localhost:11434/api/generate', {
+    // !FIXME: Make so we use an environment variable
+    const ollamaResponse = await fetch('http://10.151.130.18:11434/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
