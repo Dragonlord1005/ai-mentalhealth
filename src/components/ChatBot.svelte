@@ -1,31 +1,42 @@
-<script>
+<script lang="ts">
   import { v4 as uuidv4 } from 'uuid';
 
-  let messages = [];
-  let input = '';
-  let userId = uuidv4();
+  // Define the structure of a message
+  type Message = {
+    role: 'user' | 'assistant';
+    content: string;
+  };
 
-  // Store userId in localStorage
-  // localStorage.setItem('userId', userId);
+  // List of messages in the chat
+  let messages: Message[] = [];
+  // User input for the chat
+  let input: string = '';
+  // Unique identifier for the user
+  let userId: string = uuidv4();
 
-  async function sendMessage() {
+  /**
+   * Sends a message to the chat and processes the response from the assistant.
+   */
+  async function sendMessage(): Promise<void> {
     if (input.trim() === '') return;
 
+    // Add the user's message to the chat
     messages = [...messages, { role: 'user', content: input }];
-    const userInput = input;
+    const userInput: string = input;
     input = '';
 
     try {
-      const response = await fetch('/api/chat', {
+      const response: Response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userInput, userId }),
       });
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let assistantMessage = "";
-      let assistantMessageIndex = messages.length;
+      if (!response.body) throw new Error('Response body is null');
+      const reader: ReadableStreamDefaultReader = response.body.getReader();
+      const decoder: TextDecoder = new TextDecoder();
+      let assistantMessage: string = "";
+      let assistantMessageIndex: number = messages.length;
 
       // Add a placeholder for the assistant's message
       messages = [...messages, { role: 'assistant', content: assistantMessage }];
@@ -35,7 +46,7 @@
         if (done) break;
 
         // Decode and process each chunk of data
-        const chunk = decoder.decode(value);
+        const chunk: string = decoder.decode(value);
         assistantMessage += chunk;
         messages[assistantMessageIndex].content = assistantMessage;
         messages = [...messages]; // Trigger reactivity
