@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
     "@astrojs/node": "^9.0.0",
     "@astrojs/svelte": "^7.0.1",
     "astro": "^5.0.5",
@@ -19,6 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "@astrojs/check": "^0.9.4",
     "@types/uuid": "^10.0.0"
   }
 }
