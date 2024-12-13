@@ -6,7 +6,7 @@
   let userId = uuidv4();
 
   // Store userId in localStorage
-//   localStorage.setItem('userId', userId);
+  // localStorage.setItem('userId', userId);
 
   async function sendMessage() {
     if (input.trim() === '') return;
@@ -21,8 +21,25 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userInput, userId }),
       });
-      const data = await response.json();
-      messages = [...messages, { role: 'assistant', content: data.response }];
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let assistantMessage = "";
+      let assistantMessageIndex = messages.length;
+
+      // Add a placeholder for the assistant's message
+      messages = [...messages, { role: 'assistant', content: assistantMessage }];
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        // Decode and process each chunk of data
+        const chunk = decoder.decode(value);
+        assistantMessage += chunk;
+        messages[assistantMessageIndex].content = assistantMessage;
+        messages = [...messages]; // Trigger reactivity
+      }
     } catch (error) {
       console.error('Error:', error);
     }

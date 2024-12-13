@@ -3,8 +3,17 @@ export const prerender = false;
 // In-memory storage for chat history
 const chatHistory = new Map<string, { userId: string; messages: { role: string; content: string }[] }>();
 
-export async function POST({ request }) {
-  const body = await request.json();
+interface ChatRequest {
+  message: string;
+  userId: string;
+}
+
+interface OllamaResponseChunk {
+  response?: string;
+}
+
+export async function POST({ request }: { request: Request }) {
+  const body: ChatRequest = await request.json();
   const { message, userId } = body;
 
   if (!userId || !message) {
@@ -32,6 +41,7 @@ export async function POST({ request }) {
       body: JSON.stringify({
         model: 'llama3.2',
         prompt: prompt,
+        conversation: chatData.messages // Include the full conversation history
       }),
     });
 
@@ -39,42 +49,49 @@ export async function POST({ request }) {
       throw new Error("No response body from Ollama API");
     }
 
-    // Parse the streaming response
+    // Create a TransformStream to process the streaming response
+    const { readable, writable } = new TransformStream();
+    const writer = writable.getWriter();
     const reader = ollamaResponse.body.getReader();
     const decoder = new TextDecoder();
     let assistantMessage = "";
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+    (async () => {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
 
-      // Decode and process each chunk of data
-      const chunk = decoder.decode(value);
-      const lines = chunk.split("\n").filter(line => line.trim() !== "");
+        // Decode and process each chunk of data
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n").filter(line => line.trim() !== "");
 
-      for (const line of lines) {
-        try {
-          const parsedLine = JSON.parse(line);
-          if (parsedLine.response) {
-            assistantMessage += parsedLine.response;
+        for (const line of lines) {
+          try {
+            const parsedLine: OllamaResponseChunk = JSON.parse(line);
+            if (parsedLine.response) {
+              assistantMessage += parsedLine.response;
+              writer.write(new TextEncoder().encode(parsedLine.response));
+            }
+          } catch (error) {
+            console.error("Error parsing JSON line:", error, "Line:", line);
           }
-        } catch (error) {
-          console.error("Error parsing JSON line:", error, "Line:", line);
         }
       }
-    }
+      writer.close();
+    })();
 
     // Add the assistant's response to the conversation history
     chatData.messages.push({ role: 'assistant', content: assistantMessage });
     chatHistory.set(userId, chatData);
 
-    return new Response(JSON.stringify({ response: assistantMessage }), {
+    return new Response(readable, {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'text/plain' }
     });
   } catch (error) {
     console.error('Error:', error);
-    return new Response(JSON.stringify({ error: error.message || "An error occurred while processing your request" }), {
+    const errorMessage = error instanceof Error ? error.message : "An error occurred while processing your request";
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
