@@ -34,8 +34,8 @@ export async function POST({ request }: { request: Request }) {
     const prompt = chatData.messages.map(entry => `${entry.role}: ${entry.content}`).join("\n");
 
     // Call Ollama API with streaming response
-    // !FIXME: Make so we use an environment variable
-    const ollamaResponse = await fetch('http://10.151.130.18:11434/api/generate', {
+    const ollamaApiUrl = process.env.OLLAMA_API_URL || 'http://10.151.130.18:11434/api/generate';
+    const ollamaResponse = await fetch(ollamaApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

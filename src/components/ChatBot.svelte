@@ -1,5 +1,6 @@
 <script>
   import { v4 as uuidv4 } from 'uuid';
+  import { onMount } from 'svelte';
 
   let messages = [];
   let input = '';
@@ -44,6 +45,10 @@
       console.error('Error:', error);
     }
   }
+
+  onMount(() => {
+    // Initial setup if needed
+  });
 </script>
 
 <div class="chat-window">
