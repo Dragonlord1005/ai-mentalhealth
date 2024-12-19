@@ -35,11 +35,10 @@ const fetchAssistantResponse = server$(async (message: string, userId: string) =
   let assistantMessage = "";
 
   (async () => {
-    let done = false;
+    const done = false;
     while (!done) {
-      const { done: isDone, value } = await reader.read();
-      done = isDone;
-      if (done) break;
+      const { value } = await reader.read();
+      if (!value) break;
 
       const chunk = decoder.decode(value);
       const lines = chunk.split("\n").filter(line => line.trim() !== "");
@@ -98,7 +97,6 @@ export const ChatBot = component$(() => {
     try {
       const responseStream = await fetchAssistantResponse(userInput, state.userId);
 
-      if (!responseStream) throw new Error('Response stream is null');
       const reader = responseStream.getReader();
       const decoder = new TextDecoder();
       let assistantMessage = "";
@@ -107,11 +105,10 @@ export const ChatBot = component$(() => {
       // Add a placeholder for the assistant's message
       state.messages = [...state.messages, { role: 'assistant', content: assistantMessage }];
 
-      let done = false;
+      const done = false;
       while (!done) {
-        const { done: isDone, value } = await reader.read();
-        done = isDone;
-        if (done) break;
+        const { value } = await reader.read();
+        if (!value) break;
 
         // Decode and process each chunk of data
         const chunk = decoder.decode(value);
