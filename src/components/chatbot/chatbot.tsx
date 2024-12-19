@@ -4,17 +4,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 const chatHistory = new Map<string, { userId: string; messages: { role: string; content: string }[] }>();
 
-interface ChatRequest {
-  message: string;
-  userId: string;
-}
-
 interface OllamaResponseChunk {
   response?: string;
 }
 
 const fetchAssistantResponse = server$(async (message: string, userId: string) => {
-  let chatData = chatHistory.get(userId) || { userId, messages: [] };
+  const chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: 'user', content: message });
   const prompt = chatData.messages.map(entry => `${entry.role}: ${entry.content}`).join("\n");
 
@@ -40,8 +35,10 @@ const fetchAssistantResponse = server$(async (message: string, userId: string) =
   let assistantMessage = "";
 
   (async () => {
-    while (true) {
-      const { done, value } = await reader.read();
+    let done = false;
+    while (!done) {
+      const { done: isDone, value } = await reader.read();
+      done = isDone;
       if (done) break;
 
       const chunk = decoder.decode(value);
@@ -105,13 +102,15 @@ export const ChatBot = component$(() => {
       const reader = responseStream.getReader();
       const decoder = new TextDecoder();
       let assistantMessage = "";
-      let assistantMessageIndex = state.messages.length;
+      const assistantMessageIndex = state.messages.length;
 
       // Add a placeholder for the assistant's message
       state.messages = [...state.messages, { role: 'assistant', content: assistantMessage }];
 
-      while (true) {
-        const { done, value } = await reader.read();
+      let done = false;
+      while (!done) {
+        const { done: isDone, value } = await reader.read();
+        done = isDone;
         if (done) break;
 
         // Decode and process each chunk of data
