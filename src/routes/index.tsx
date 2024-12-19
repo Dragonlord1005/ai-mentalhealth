@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <div>
-        Welcome to the protoype of EVE ai!
+        Welcome to the prototype of EVE ai!
         <br/>
         Currently the model hasn't been trained, so it's a blank slate. Feel free to ask it anything!
       </div>
