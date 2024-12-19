@@ -36,7 +36,7 @@ const start = async () => {
   // Enable compression
   // https://github.com/fastify/fastify-compress
   // IMPORTANT NOTE: THIS MUST BE REGISTERED BEFORE THE fastify-qwik PLUGIN
-  await fastify.register(import('@fastify/compress'))
+  await fastify.register(import("@fastify/compress"));
 
   // Handle Qwik City using a plugin
   await fastify.register(FastifyQwik, { distDir, buildDir });
