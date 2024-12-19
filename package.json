@@ -31,6 +31,8 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.11.0",
     "@builder.io/qwik-city": "^1.11.0",
+    "@iconify-json/ri": "^1.2.5",
+    "@svgx/core": "^1.0.1",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
     "@typescript-eslint/eslint-plugin": "7.16.1",
@@ -47,8 +49,10 @@
   "dependencies": {
     "@fastify/compress": "^6.2.1",
     "@fastify/static": "^6.10.1",
+    "@iconify-json/mdi": "^1.2.2",
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
+    "unplugin-icons": "^0.22.0",
     "uuid": "^11.0.3"
   }
 }
