@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { ChatBot } from "~/components/chatbot/chatbot";
-import { ThemeToggle } from "~/components/ThemeToggle";
+import { ThemeToggle } from "~/components/ThemeToggle/ThemeToggle";
 
 export default component$(() => {
   return (

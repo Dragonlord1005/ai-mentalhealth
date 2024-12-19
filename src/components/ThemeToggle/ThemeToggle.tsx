@@ -1,7 +1,6 @@
 import { component$, useStore, $, useTask$, useStylesScoped$ } from "@builder.io/qwik";
-import MdiMoonFull from '~icons/mdi/moon-full';
-import MdiWhiteBalanceSunny from '~icons/mdi/white-balance-sunny';
-
+import { MdiMoonFull } from "./MoonFull";
+import { MdiWeatherSunny } from "./Sun";
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: 'light' });
 
@@ -36,7 +35,7 @@ export const ThemeToggle = component$(() => {
 
   return (
     <button onClick$={toggleTheme} class="theme-toggle">
-      {store.theme === 'dark' ? <MdiWhiteBalanceSunny class="icon" /> : <MdiMoonFull class="icon" />}
+      {store.theme === 'dark' ? <MdiWeatherSunny class="icon" /> : <MdiMoonFull class="icon" />}
       Toggle to {store.theme === 'dark' ? 'light' : 'dark'} mode
     </button>
   );
