@@ -16,7 +16,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to EVE ai",
+  title: "EVE ai",
   meta: [
     {
       name: "description",
