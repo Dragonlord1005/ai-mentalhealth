@@ -28,6 +28,11 @@ p {
   color: var(--p-color);
 }
 
+theme-toggle {
+  display: block;
+  margin: 20px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root[data-theme='dark'] {
     --background-color: #121212;

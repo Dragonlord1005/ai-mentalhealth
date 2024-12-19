@@ -6,13 +6,13 @@ import { ThemeToggle } from "~/components/ThemeToggle";
 export default component$(() => {
   return (
     <>
+      <ThemeToggle />
       <div>
         Welcome to the protoype of EVE ai!
         <br/>
         Currently the model hasn't been trained, so it's a blank slate. Feel free to ask it anything!
       </div>
       <ChatBot />
-      <ThemeToggle />
     </>
   );
 });
