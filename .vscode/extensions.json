@@ -2,7 +2,8 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "unifiedjs.vscode-mdx",
-    "aaron-bond.better-comments"
+    "aaron-bond.better-comments",
+    "eamodio.gitlens"
   ],
   "unwantedRecommendations": []
 }
