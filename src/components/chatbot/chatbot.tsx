@@ -1,6 +1,7 @@
-import { component$, useStore, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, useStore } from '@builder.io/qwik';
 import { server$ } from '@builder.io/qwik-city';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chatbot.module.css';
 
 // Store chat history in a Map
 const chatHistory = new Map<string, { userId: string; messages: { role: string; content: string }[] }>();
@@ -73,22 +74,6 @@ const fetchAssistantResponse = server$(async (message: string, userId: string) =
 
 // Define the ChatBot component
 export const ChatBot = component$(() => {
-  // Apply scoped styles
-  useStylesScoped$(`
-    .chat-window {
-      height: 300px;
-      overflow-y: scroll;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-    .message {
-      margin-bottom: 10px;
-    }
-    input {
-      margin-right: 10px;
-    }
-  `);
 
   // Initialize component state
   const state = useStore({
@@ -137,9 +122,9 @@ export const ChatBot = component$(() => {
   // Render the chat interface
   return (
     <div>
-      <div class="chat-window">
+      <div class={styles.chatWindow}>
         {state.messages.map((message, index) => (
-          <div key={index} class="message">
+          <div key={index} class={styles.message}>
             <strong>{message.role}:</strong> {message.content}
           </div>
         ))}
