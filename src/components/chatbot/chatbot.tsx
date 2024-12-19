@@ -2,17 +2,22 @@ import { component$, useStore, useStylesScoped$ } from '@builder.io/qwik';
 import { server$ } from '@builder.io/qwik-city';
 import { v4 as uuidv4 } from 'uuid';
 
+// Store chat history in a Map
 const chatHistory = new Map<string, { userId: string; messages: { role: string; content: string }[] }>();
 
+// Define the structure of the response chunk from Ollama API
 interface OllamaResponseChunk {
   response?: string;
 }
 
+// Function to fetch the assistant's response from the Ollama API
 const fetchAssistantResponse = server$(async (message: string, userId: string) => {
+  // Retrieve or initialize chat data for the user
   const chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: 'user', content: message });
   const prompt = chatData.messages.map(entry => `${entry.role}: ${entry.content}`).join("\n");
 
+  // Fetch response from Ollama API
   const ollamaApiUrl = process.env.OLLAMA_API_URL || 'http://10.151.130.18:11434/api/generate';
   const ollamaResponse = await fetch(ollamaApiUrl, {
     method: 'POST',
@@ -28,12 +33,14 @@ const fetchAssistantResponse = server$(async (message: string, userId: string) =
     throw new Error("No response body from Ollama API");
   }
 
+  // Create a TransformStream to process the response
   const { readable, writable } = new TransformStream();
   const writer = writable.getWriter();
   const reader = ollamaResponse.body.getReader();
   const decoder = new TextDecoder();
   let assistantMessage = "";
 
+  // Process the response stream
   (async () => {
     const done = false;
     while (!done) {
@@ -57,13 +64,16 @@ const fetchAssistantResponse = server$(async (message: string, userId: string) =
     writer.close();
   })();
 
+  // Update chat history with the assistant's response
   chatData.messages.push({ role: 'assistant', content: assistantMessage });
   chatHistory.set(userId, chatData);
 
   return readable;
 });
 
+// Define the ChatBot component
 export const ChatBot = component$(() => {
+  // Apply scoped styles
   useStylesScoped$(`
     .chat-window {
       height: 300px;
@@ -80,21 +90,24 @@ export const ChatBot = component$(() => {
     }
   `);
 
+  // Initialize component state
   const state = useStore({
     messages: [] as { role: 'user' | 'assistant'; content: string }[],
     input: '',
     userId: uuidv4(),
   });
 
-
+  // Function to send a message
   const sendMessage = server$(async () => {
     if (state.input.trim() === '') return;
 
+    // Add user's message to the state
     state.messages = [...state.messages, { role: 'user', content: state.input }];
     const userInput = state.input;
     state.input = '';
 
     try {
+      // Fetch assistant's response
       const responseStream = await fetchAssistantResponse(userInput, state.userId);
 
       const reader = responseStream.getReader();
@@ -121,6 +134,7 @@ export const ChatBot = component$(() => {
     }
   });
 
+  // Render the chat interface
   return (
     <div>
       <div class="chat-window">
