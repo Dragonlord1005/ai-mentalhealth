@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { ChatBot } from "~/components/chatbot/chatbot";
 
 export default component$(() => {
   return (
@@ -10,6 +11,8 @@ export default component$(() => {
         <br />
         Happy coding.
       </div>
+      {/* TODO: I have no idea if this works  */}
+      <ChatBot />
     </>
   );
 });

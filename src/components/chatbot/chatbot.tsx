@@ -1,4 +1,5 @@
-import { component$, useStore, $ } from '@builder.io/qwik';
+import { component$, useStore, useStylesScoped$ } from '@builder.io/qwik';
+import { server$ } from '@builder.io/qwik-city';
 import { v4 as uuidv4 } from 'uuid';
 
 const chatHistory = new Map<string, { userId: string; messages: { role: string; content: string }[] }>();
@@ -12,7 +13,7 @@ interface OllamaResponseChunk {
   response?: string;
 }
 
-const fetchAssistantResponse = async (message: string, userId: string) => {
+const fetchAssistantResponse = server$(async (message: string, userId: string) => {
   let chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: 'user', content: message });
   const prompt = chatData.messages.map(entry => `${entry.role}: ${entry.content}`).join("\n");
@@ -64,16 +65,33 @@ const fetchAssistantResponse = async (message: string, userId: string) => {
   chatHistory.set(userId, chatData);
 
   return readable;
-};
+});
 
 export const ChatBot = component$(() => {
+  useStylesScoped$(`
+    .chat-window {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    input {
+      margin-right: 10px;
+    }
+  `);
+
   const state = useStore({
     messages: [] as { role: 'user' | 'assistant'; content: string }[],
     input: '',
     userId: uuidv4(),
   });
 
-  const sendMessage = $(async () => {
+  
+  const sendMessage = server$(async () => {
     if (state.input.trim() === '') return;
 
     state.messages = [...state.messages, { role: 'user', content: state.input }];
@@ -124,22 +142,6 @@ export const ChatBot = component$(() => {
         placeholder="Type your message..."
       />
       <button onClick$={sendMessage}>Send</button>
-
-      <style>{`
-        .chat-window {
-          height: 300px;
-          overflow-y: scroll;
-          border: 1px solid #ccc;
-          padding: 10px;
-          margin-bottom: 10px;
-        }
-        .message {
-          margin-bottom: 10px;
-        }
-        input {
-          margin-right: 10px;
-        }
-      `}</style>
     </div>
   );
 });
