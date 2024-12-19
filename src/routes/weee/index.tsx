@@ -1,4 +1,6 @@
 import { component$ } from '@builder.io/qwik';
+import type { DocumentHead } from "@builder.io/qwik-city";
+
 
 const TestPage = component$(() => {
     return (
@@ -9,5 +11,15 @@ const TestPage = component$(() => {
         </div>
     );
 });
+
+export const head: DocumentHead = {
+    title: "Test Page",
+    meta: [
+        {
+            name: "description",
+            content: "Test page description",
+        },
+    ],
+};
 
 export default TestPage;
