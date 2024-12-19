@@ -90,7 +90,7 @@ export const ChatBot = component$(() => {
     userId: uuidv4(),
   });
 
-  
+
   const sendMessage = server$(async () => {
     if (state.input.trim() === '') return;
 
@@ -141,7 +141,7 @@ export const ChatBot = component$(() => {
         onKeyPress$={(e) => e.key === 'Enter' && sendMessage()}
         placeholder="Type your message..."
       />
-      <button onClick$={sendMessage}>Send</button>
+      <button onClick$={() => sendMessage()}>Send</button>
     </div>
   );
 });
