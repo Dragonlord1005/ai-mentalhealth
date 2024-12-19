@@ -5,20 +5,18 @@ import { ChatBot } from "~/components/chatbot/chatbot";
 export default component$(() => {
   return (
     <>
-      <h1>Hi 👋</h1>
       <div>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
+        Welcome to the protoype of ACESO ai!
+        <br/>
+        Currently the model hasn't been trained, so it's a blank slate. Feel free to ask it anything!
       </div>
-      {/* TODO: I have no idea if this works  */}
       <ChatBot />
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Welcome to ACESO ai",
   meta: [
     {
       name: "description",
