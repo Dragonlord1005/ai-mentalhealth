@@ -12,7 +12,9 @@
 			"extensions": [
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
-				"aaron-bond.better-comments"
+				"aaron-bond.better-comments",
+				"dbaeumer.vscode-eslint",
+				"unifiedjs.vscode-mdx"
 			]
 		}
 	}
