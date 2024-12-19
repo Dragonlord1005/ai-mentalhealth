@@ -6,7 +6,7 @@ export default component$(() => {
   return (
     <>
       <div>
-        Welcome to the protoype of ACESO ai!
+        Welcome to the protoype of EVE ai!
         <br/>
         Currently the model hasn't been trained, so it's a blank slate. Feel free to ask it anything!
       </div>
@@ -16,11 +16,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to ACESO ai",
+  title: "Welcome to EVE ai",
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "The prototype of EVE ai, a mental health LLM designed to assist people living with mental health conditions.",
     },
   ],
 };
