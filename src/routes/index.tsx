@@ -1,10 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { ChatBot } from "~/components/chatbot/chatbot";
+import { ThemeToggle } from "~/components/ThemeToggle/ThemeToggle";
 
 export default component$(() => {
   return (
     <>
+      <ThemeToggle />
       <div>
         Welcome to the prototype of EVE ai!
         <br />
@@ -17,7 +19,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to EVE ai",
+  title: "EVE ai",
   meta: [
     {
       name: "description",
