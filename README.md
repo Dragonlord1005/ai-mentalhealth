@@ -1,75 +1,38 @@
-# Qwik City App ⚡️
+# Solace AI
+## Tools for a stress-free life, one step at a time
 
-- [Qwik Docs](https://qwik.dev/)
-- [Discord](https://qwik.dev/chat)
-- [Qwik GitHub](https://github.com/QwikDev/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+Solace is a Large Language model created to provide the tools for balancing mental health with a fulfilling, responsible life. Each tool is designed to help lead to a better, less stressed you. 
+Key tools include:
+- Meal Plans
+- Medication Reminders
+- Ideal sleep plans
+- Medication refill assistance 
+- Crisis hotline
 
----
+## Sawyer's Story
+Sawyer, a Developer on this project, was diagnosed with Bipolar Disorder 1 at the age of 15. After years of relearning how to take care of himself and his diagnosis he was able to get his life back on track. But not everyone has the support system he had. That's what drove him to design Solace. Personalized guided meditation is one of the features Sawyer envisioned, since meditation was a core part of his journey.
 
-## Project Structure
+## Change the Environment  
+Solace takes a unique approach to mental health recovery. Instead of diagnosing and treating the condition, it is designed to help with creating a better environment to allow growth and development.
 
-This project is using Qwik with [QwikCity](https://qwik.dev/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+Upon opening Solace you fill out a questionnaire about your brain type and goals. Solace uses that information to provide tools to help with your goals, personalized to help you grow in a way that works for your mind.
 
-Inside your project, you'll see the following directory structure:
+Anyone can improve their lifestyle with Solace, with a design to fit each and every person.
+ 
+Solace is made to help you manage your busy life, by providing reminders, tools, and recommendations to foster improvement.
 
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+## Nodes
+While designing Solace, we realized we had an issue. How could we ensure your data stays private while still enabling seamless integration with external tools? Here's where Nodes come in.
 
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.dev/qwikcity/routing/overview/) for more info.
+Nodes are optional tools for bridging the world with Solace. Think of them like bonus features.
 
-- `src/components`: Recommended directory for components.
+What would a Node look like? 
+Let's say you install a calendar Node. This Node could make calendar reminders and edits. 
+- What about a Fitness Watch? A node could connect that. 
+- Want to automatically have your medication refilled? A node could call your refills in for you.
+- We want to make as many as possible, so if you have any ideas, feel free to submit a request.
 
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+## Data Privacy
+Data privacy is our top priority. By default, no data is stored unless you choose to opt in. From there, data remains securely stored in an encrypted library on your device, and is only sent to the server to provide context. You can view your library and delete data you don't want stored at any moment. If you would like to try out experimental features, you can enable the "Use my Data to train future models" option.
 
-## Add Integrations and deployment
-
-Use the `pnpm qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.dev/qwikcity/guides/static-site-generation/).
-
-```shell
-pnpm qwik add # or `pnpm qwik add`
-```
-
-## Development
-
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
-
-```shell
-npm start # or `pnpm start`
-```
-
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
-
-## Preview
-
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
-
-```shell
-pnpm preview # or `pnpm preview`
-```
-
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
-
-```shell
-pnpm build # or `pnpm build`
-```
-
-## Fastify Server
-
-This app has a minimal [Fastify server](https://fastify.dev/) implementation. After running a full build, you can preview the build using the command:
-
-```
-pnpm serve
-```
-
-Then visit [http://localhost:3000/](http://localhost:3000/)
+### Please note that this project is still in early development, not many features are implemented.
