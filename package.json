@@ -33,7 +33,7 @@
     "@builder.io/qwik-city": "1.11.0",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
-    "@typescript-eslint/eslint-plugin": "7.16.1",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.16.1",
     "dotenv": "16.4.7",
     "eslint": "8.57.0",
