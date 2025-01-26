@@ -16,7 +16,7 @@
           buildInputs = [
             pkgs.nodejs_20
             pkgs.pnpm
-            pkgs.postgresql
+            pkgs.sqlite
             pkgs.prisma
             pkgs.prisma-engines
           ];
@@ -24,12 +24,6 @@
             PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
             PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
             PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-            # Postgress
-            pghost = "127.0.0.1";
-            pgport = "5432";
-            pguser = "postgres";
-            pgpassword = "password";
-            PGDATABASE = "devdb";
           };
         };
       });
