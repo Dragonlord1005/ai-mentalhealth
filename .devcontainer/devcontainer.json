@@ -5,8 +5,7 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
   "features": {
-    "ghcr.io/devcontainers-extra/features/pnpm:2": {},
-    "ghcr.io/duduribeiro/devcontainer-features/lunarvim:0": {}
+    "ghcr.io/devcontainers-extra/features/pnpm:2": {}
   },
   "customizations": {
     "vscode": {
