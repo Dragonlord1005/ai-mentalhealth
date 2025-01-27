@@ -21,7 +21,6 @@ export const useCreateUser = routeAction$(
   zod$({
     name: z.string(),
     email: z.string().email(),
-    password: z.string(),
   }),
 );
 
@@ -38,14 +37,6 @@ export default component$(() => {
         <label>
           Email
           <input name="email" value={createUserAction.formData?.get("email")} />
-        </label>
-        <label>
-          Password
-          <input
-            name="password"
-            type="password"
-            value={createUserAction.formData?.get("password")}
-          />
         </label>
         <button type="submit">Create</button>
       </Form>

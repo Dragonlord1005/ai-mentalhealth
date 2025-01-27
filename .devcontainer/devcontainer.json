@@ -12,12 +12,13 @@
 	"customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
-        "aaron-bond.better-comments",
-        "dbaeumer.vscode-eslint",
-        "unifiedjs.vscode-mdx"
-      ]
+		"GitHub.copilot",
+		"GitHub.copilot-chat",
+		"aaron-bond.better-comments",
+		"dbaeumer.vscode-eslint",
+		"unifiedjs.vscode-mdx",
+		"Prisma.prisma"
+	]
     }
   },
 
