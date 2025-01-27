@@ -14,6 +14,9 @@ importers:
       '@fastify/static':
         specifier: 8.0.4
         version: 8.0.4
+      '@prisma/client':
+        specifier: 5.3.1
+        version: 5.3.1(prisma@5.3.1)
       fastify:
         specifier: 5.2.1
         version: 5.2.1
@@ -30,9 +33,6 @@ importers:
       '@builder.io/qwik-city':
         specifier: 1.12.0
         version: 1.12.0(acorn@8.14.0)(rollup@4.31.0)(typescript@5.7.3)(vite@5.4.12(@types/node@22.10.7))
-      '@prisma/client':
-        specifier: 5.3.1
-        version: 5.3.1(prisma@5.3.1)
       '@types/eslint':
         specifier: 8.56.10
         version: 8.56.10
