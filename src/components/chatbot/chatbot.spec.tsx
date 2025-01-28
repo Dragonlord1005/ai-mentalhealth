@@ -1,7 +1,8 @@
 import { createDOM } from "@builder.io/qwik/testing";
 import { describe, it, expect, vi, beforeAll } from "vitest";
 import { ChatBot } from "./chatbot";
-import styles from './chatbot.module.css';
+
+// TODO: Make a mock implementation that could allow us to mock the chatbot api calls
 
 describe("ChatBot Component", () => {
   it("should render ChatBot component", async () => {
