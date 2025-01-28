@@ -1,10 +1,7 @@
 import { createDOM } from "@builder.io/qwik/testing";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeAll } from "vitest";
 import { ChatBot } from "./chatbot";
-
-// Should make sure the ChatBot component is rendered
-// Should also make sure buttons exist
-// Needto keep in mind that the buttons won't actually work so we need to fiure out how to avoid that breaking it
+import styles from './chatbot.module.css';
 
 describe("ChatBot Component", () => {
   it("should render ChatBot component", async () => {
@@ -13,5 +10,23 @@ describe("ChatBot Component", () => {
     const chatBot = screen.querySelector("ChatBot");
     expect(chatBot).not.toBeNull();
   });
-});
+
+  it("should render buttons", async () => {
+    const { screen, render } = await createDOM();
+    await render(<ChatBot />);
+    const buttons = screen.querySelectorAll("button");
+    expect(buttons.length).toBeGreaterThan(0);
+  });
+
+  it("Should be able to click the buttons", async () => {
+    const { screen, render, userEvent } = await createDOM();
+    await render(<ChatBot />);
+    const buttons = screen.querySelectorAll("button");
+    const button = buttons[0];
+    await userEvent(button, "click");
+  });
+}, 
+); // Increase timeout for the entire suite to 20 seconds
+
+
 
