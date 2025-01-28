@@ -23,7 +23,11 @@
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
+    "postinstall": "prisma generate",
     "preview": "qwik build preview && vite preview --open",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --schema=./prisma/schema.dev.prisma",
+    "prisma:migrate:prod": "prisma migrate deploy",
     "serve": "node server/entry.fastify",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
@@ -39,6 +43,7 @@
     "eslint": "8.57.0",
     "eslint-plugin-qwik": "1.12.0",
     "prettier": "3.4.2",
+    "prisma": "6.2.1",
     "typescript": "5.7.3",
     "undici": "7.3.0",
     "vite": "5.4.12",
@@ -49,6 +54,8 @@
     "@fastify/static": "8.0.4",
     "fastify": "5.2.1",
     "fastify-plugin": "5.0.1",
-    "uuid": "11.0.5"
+    "uuid": "11.0.5",
+    "@prisma/client": "6.2.1"
+
   }
 }
