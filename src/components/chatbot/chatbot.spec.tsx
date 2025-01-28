@@ -1,5 +1,5 @@
 import { createDOM } from "@builder.io/qwik/testing";
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect } from "vitest";
 import { ChatBot } from "./chatbot";
 
 // TODO: Make a mock implementation that could allow us to mock the chatbot api calls
