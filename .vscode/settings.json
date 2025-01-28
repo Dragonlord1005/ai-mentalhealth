@@ -1,0 +1,3 @@
+{
+    "vitest.rootConfig": "./vite.config.ts"
+}
