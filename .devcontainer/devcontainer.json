@@ -18,7 +18,8 @@
 		"dbaeumer.vscode-eslint",
 		"unifiedjs.vscode-mdx",
 		"Prisma.prisma",
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"antfu.file-nesting"
 	]
     }
   },
