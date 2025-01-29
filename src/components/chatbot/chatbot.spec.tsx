@@ -36,7 +36,7 @@ describe("ChatBot Component", () => {
       inputBox.value = "Hello";
     }
     // userEvent(inputBox!, "Hello");
-    expect(inputBox!.value).toBe("Hell");
+    expect(inputBox!.value).toBe("Hello");
   });
 });
 
