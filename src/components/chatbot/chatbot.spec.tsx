@@ -27,6 +27,12 @@ describe("ChatBot Component", () => {
     const button = buttons[0];
     await userEvent(button, "click");
   });
+  it("Should be able to type in the input box", async () => {
+    const { screen, render, userEvent } = await createDOM();
+    await render(<ChatBot />);
+    const inputBox = screen.querySelector("input");
+    await userEvent.type(inputBox!, "Hello");
+  });
 }, 
 ); // Increase timeout for the entire suite to 20 seconds
 
