@@ -19,12 +19,11 @@
         "unifiedjs.vscode-mdx",
         "Prisma.prisma",
         "eamodio.gitlens",
-        "antfu.file-nesting"
+        "antfu.file-nesting",
+        "vitest.explorer"
       ]
     }
   },
-
-  "updateContentCommand": "pnpm install --frozen-lockfile",
 
   "updateContentCommand": "pnpm install --frozen-lockfile",
 
