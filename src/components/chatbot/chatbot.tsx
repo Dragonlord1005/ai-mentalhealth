@@ -152,6 +152,7 @@ export const ChatBot = component$(() => {
         onInput$={(e) => (state.input = (e.target as HTMLInputElement).value)}
         onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
         placeholder="Type your message..."
+        type="text"
       />
       <button onClick$={() => sendMessage()}>Send</button>
     </div>
