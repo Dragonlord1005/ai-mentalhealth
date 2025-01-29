@@ -26,7 +26,7 @@ describe("ChatBot Component", () => {
   });
 
   it("Should be able to type in the input box", async () => {
-    const { screen, render, userEvent } = await createDOM();
+    const { screen, render } = await createDOM();
     await render(<ChatBot />);
     const inputBox = screen.querySelector("input");
     if (inputBox) {
