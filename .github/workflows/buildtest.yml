@@ -1,4 +1,4 @@
-name: Tests Build
+name: Builds the project
 on:
   push:
   pull_request:
