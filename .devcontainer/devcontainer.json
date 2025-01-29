@@ -20,7 +20,8 @@
         "Prisma.prisma",
         "eamodio.gitlens",
         "antfu.file-nesting",
-        "vitest.explorer"
+        "vitest.explorer",
+        "ms-azuretools.vscode-docker"
       ]
     }
   },
@@ -28,8 +29,13 @@
   "updateContentCommand": "pnpm install --frozen-lockfile",
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "pnpm install"
+  "postCreateCommand": "pnpm install",
 
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
+
+  // Environment variables
+  "remoteEnv": {
+    "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/postgres"
+  }
 }
