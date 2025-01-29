@@ -30,10 +30,10 @@
     "prisma:migrate:prod": "prisma migrate deploy",
     "serve": "node server/entry.fastify",
     "start": "vite --open --mode ssr",
-    "test.unit": "vitest ",
-    "test.unit.ui": "vitest --ui .",
-    "test.unit.coverage": "vitest --coverage",
-    "test.unit.ui.coverage": "vitest --ui . --coverage",
+    "test.unit": "vitest src",
+    "test.unit.ui": "vitest src --ui .",
+    "test.unit.coverage": "vitest src --coverage",
+    "test.unit.ui.coverage": "vitest --ui src --coverage",
     "qwik": "qwik"
   },
   "devDependencies": {
