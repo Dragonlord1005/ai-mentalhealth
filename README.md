@@ -9,6 +9,9 @@ Key tools include:
 - Medication refill assistance 
 - Crisis hotline
 
+
+
+
 ## Sawyer's Story
 Sawyer, a Developer on this project, was diagnosed with Bipolar Disorder 1 at the age of 15. After years of relearning how to take care of himself and his diagnosis he was able to get his life back on track. But not everyone has the support system he had. That's what drove him to design Solace. Personalized guided meditation is one of the features Sawyer envisioned, since meditation was a core part of his journey.
 
