@@ -25,7 +25,8 @@ export default defineConfig(({ command, mode }): UserConfig => {
     // This tells Vite which dependencies to pre-build in dev mode.
     optimizeDeps: {
       include: [
-        '@auth/core'
+        '@auth/qwik',
+        'uuid'
       ],
       // Put problematic deps that break bundling here, mostly those with binaries.
       // For example ['better-sqlite3'] if you use that in server functions.
