@@ -8,7 +8,7 @@ export default component$(() => {
     <>
       <ThemeToggle />
       <div>
-        Welcome to the prototype of SOLUS ai!
+        Welcome to the prototype of Solace ai!
         <br />
         Currently the model hasn't been trained, so it's a blank slate. Feel
         free to ask it anything!
@@ -19,12 +19,12 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "SOLUS ai",
+  title: "Solace ai",
   meta: [
     {
       name: "description",
       content:
-        "The prototype of SOLUS ai, a mental health LLM designed to assist people living with mental health conditions.",
+        "The prototype of Solace ai, a mental health LLM designed to assist people living with mental health conditions.",
     },
   ],
 };
