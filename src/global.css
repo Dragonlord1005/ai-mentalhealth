@@ -1,10 +1,44 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--background-color);
-}
+:root {
+    --bg-light: #f4f4f4;
+    --text-light: #333;
+    --input-bg-light: #ffffff;
+    --input-border-light: #e0e0e0;
+    
+    /* Dark Mode Colors */
+    --bg-dark: #1a1a2e;
+    --text-dark: #e0e0e0;
+    --input-bg-dark: #16213e;
+    --input-border-dark: #0f3460;
+    
+    /* Gradient Colors */
+    --gradient-start: #ff6b00;
+    --gradient-end: #ffff00;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  }
+  
+  header {
+    padding: 15px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+  }
+  
 
+  
 div {
   max-width: 800px;
   margin: 50px auto;
@@ -15,24 +49,18 @@ div {
   color: var(--text-color);
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: var(--h1-color);
-}
-
-p {
-  font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 10px;
-  color: var(--p-color);
-}
-
-theme-toggle {
+.theme-toggle {
   display: block;
   margin: 20px;
 }
 
+@media screen and (max-height: 500px) {
+    header {
+      width: 200px;
+      height: 100%;
+    }
+  }
+  
 @media (prefers-color-scheme: dark) {
   :root[data-theme="dark"] {
     --background-color: #121212;

@@ -119,7 +119,7 @@
     border-top: 1px solid rgba(0,0,0,0.1);
   }
   
-  #userInput {
+  .userInput {
     flex-grow: 1;
     margin-right: 10px;
     padding: 10px;
@@ -134,7 +134,7 @@
     color: var(--text-dark);
   }
   
-  #sendMessage {
+  .sendMessage {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     border: none;
     color: white;
@@ -146,7 +146,7 @@
     cursor: pointer;
   }
   
-  #sendMessage svg {
+  .sendMessage svg {
     width: 24px;
     height: 24px;
   }
@@ -168,13 +168,15 @@
       max-height: 500px;
     }
   
-    header {
-      width: 200px;
-      height: 100%;
-    }
-  
     .chat-interface {
       flex-grow: 1;
     }
   }
-  
+
+/* System Preference Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .chat-container {
+        background-color: var(--input-bg-dark);
+        color: var(--text-dark);
+    }
+}
