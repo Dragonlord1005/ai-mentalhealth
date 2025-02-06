@@ -3,13 +3,13 @@
   --text-light: #333;
   --input-bg-light: #ffffff;
   --input-border-light: #e0e0e0;
-  
+
   /* Dark Mode Colors */
   --bg-dark: #1a1a2e;
   --text-dark: #e0e0e0;
   --input-bg-dark: #16213e;
   --input-border-dark: #0f3460;
-  
+
   /* Gradient Colors */
   --gradient-start: #ff6b00;
   --gradient-end: #ffff00;
@@ -19,16 +19,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
 }
 
 .chat-container {
@@ -36,7 +42,7 @@ body {
   height: 95vh;
   background-color: var(--input-bg-light);
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -56,7 +62,11 @@ body.dark-mode .chat-container {
 
 header {
   padding: 15px;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
   color: white;
 }
 
@@ -116,7 +126,7 @@ body.dark-mode .theme-icon.sun {
 .chat-input-area {
   display: flex;
   padding: 15px;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 #userInput {
@@ -135,7 +145,11 @@ body.dark-mode #userInput {
 }
 
 #sendMessage {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
   border: none;
   color: white;
   padding: 10px;
