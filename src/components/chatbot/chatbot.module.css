@@ -1,3 +1,36 @@
+:root {
+  --bg-light: #f4f4f4;
+  --text-light: #333;
+  --input-bg-light: #ffffff;
+  --input-border-light: #e0e0e0;
+  
+  /* Dark Mode Colors */
+  --bg-dark: #1a1a2e;
+  --text-dark: #e0e0e0;
+  --input-bg-dark: #16213e;
+  --input-border-dark: #0f3460;
+  
+  /* Gradient Colors */
+  --gradient-start: #ff6b00;
+  --gradient-end: #ffff00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
 .chat-container {
   width: 90vw;
   height: 95vh;

@@ -5,12 +5,10 @@ import {
   useTask$,
   useStylesScoped$,
 } from "@builder.io/qwik";
-// import { MdiMoonFull } from "./MoonFull";
-// import { MdiWeatherSunny } from "./Sun";
-import styles from "./ThemeToggle.module.css"
-
+import { MdiMoonFull } from "./MoonFull";
+import { MdiWeatherSunny } from "./Sun";
 export const ThemeToggle = component$(() => {
-  const store = useStore({ theme: "light", darkMode: false });
+  const store = useStore({ theme: "light" });
 
   useTask$(() => {
     if (typeof localStorage !== "undefined") {
@@ -19,9 +17,7 @@ export const ThemeToggle = component$(() => {
         "(prefers-color-scheme: dark)",
       ).matches;
       store.theme = storedTheme || (systemPrefersDark ? "dark" : "light");
-      store.darkMode = store.theme === "dark";
       document.documentElement.setAttribute("data-theme", store.theme);
-      document.body.classList.toggle("dark-mode", store.darkMode);
     }
   });
 
@@ -33,27 +29,26 @@ export const ThemeToggle = component$(() => {
     }
   });
 
+  useStylesScoped$(`
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  `);
+
   return (
-    // <button onClick$={toggleTheme} class="theme-toggle">
-    //   {store.theme === "dark" ? (
-    //     <MdiWeatherSunny class="icon" />
-    //   ) : (
-    //     <MdiMoonFull class="icon" />
-    //   )}
-    //   Toggle to {store.theme === "dark" ? "light" : "dark"} mode
-    // </button>
-    <div class="theme-toggle">
-      <input
-        type="checkbox"
-        id="theme-switch"
-        class={styles.themeToggle}
-        checked={store.darkMode}
-        onClick$={toggleTheme}
-      />
-      <label for="theme-switch" class="theme-switch-label">
-        <span class="theme-icon moon">🌙</span>
-        <span class="theme-icon sun">☀️</span>
-      </label>
-    </div>
+    <button onClick$={toggleTheme} class="theme-toggle">
+      {store.theme === "dark" ? (
+        <MdiWeatherSunny class="icon" />
+      ) : (
+        <MdiMoonFull class="icon" />
+      )}
+      Toggle to {store.theme === "dark" ? "light" : "dark"} mode
+    </button>
   );
 });

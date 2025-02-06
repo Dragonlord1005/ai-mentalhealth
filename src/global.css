@@ -1,32 +1,54 @@
-:root {
-  --bg-light: #f4f4f4;
-  --text-light: #333;
-  --input-bg-light: #ffffff;
-  --input-border-light: #e0e0e0;
-  
-  /* Dark Mode Colors */
-  --bg-dark: #1a1a2e;
-  --text-dark: #e0e0e0;
-  --input-bg-dark: #16213e;
-  --input-border-dark: #0f3460;
-  
-  /* Gradient Colors */
-  --gradient-start: #ff6b00;
-  --gradient-end: #ffff00;
-}
-
-* {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--background-color);
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+div {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: var(--div-background-color);
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: var(--h1-color);
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: var(--p-color);
+}
+
+theme-toggle {
+  display: block;
+  margin: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="dark"] {
+    --background-color: #121212;
+    --div-background-color: #222222;
+    --text-color: #adadad;
+    --h1-color: #333;
+    --p-color: #666;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="light"] {
+    --background-color: #ffffff;
+    --div-background-color: #f0f0f0;
+    --text-color: #000000;
+    --h1-color: #000000;
+    --p-color: #333333;
+  }
 }
