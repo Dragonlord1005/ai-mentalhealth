@@ -1,141 +1,132 @@
-:root {
-  --bgLight: #f4f4f4;
-  --textLight: #333;
-  --inputBgLight: #ffffff;
-  --inputBorderLight: #e0e0e0;
-  
-  /* Dark Mode Colors */
-  --bgDark: #1a1a2e;
-  --textDark: #e0e0e0;
-  --inputBgDark: #16213e;
-  --inputBorderDark: #0f3460;
-  
-  /* Gradient Colors */
-  --gradientStart: #ff6b00;
-  --gradientEnd: #ffff00;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
-}
-
+/* Container for everything */
 .chatContainer {
   width: 90vw;
   height: 95vh;
-  background-color: var(--inputBgLight);
+  background: linear-gradient(to bottom, #FF7F11, #FFD700); /* Orange–gold vertical gradient */
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  max-width: 600px;
+  margin: auto; /* centers horizontally */
 }
 
-/* Light Mode Default */
-.chatContainer {
-  background-color: var(--inputBgLight);
-  color: var(--textLight);
+/* Toggle dark-mode class on the entire container if you like,
+   or just rely on body.dark-mode for theme switching */
+.darkMode {
+  /* Example: Could invert some of the coloring, if desired. */
 }
 
-/* Dark Mode */
-body.darkMode .chatContainer {
-  background-color: var(--inputBgDark);
-  color: var(--textDark);
-}
-
+/* Top header area */
 header {
+  background: linear-gradient(to right, #FF7F11, #FFD700); /* Horizontal gradient */
   padding: 15px;
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
   color: white;
-}
-
-.logo {
+  font-size: 20px;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
+/* Logo/title on the left, theme toggle on the right */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Theme toggle container */
 .themeToggle {
   position: relative;
 }
 
+/* Checkbox for the theme switch (hidden) */
 .themeSwitch {
   display: none;
 }
 
+/* Label that acts as the visible toggle */
 .themeSwitchLabel {
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.themeIcon {
+.themeIconMoon,
+.themeIconSun {
   font-size: 20px;
   margin: 0 5px;
+  transition: opacity 0.3s ease;
 }
 
-.themeIcon.moon {
+/* Adjust these as desired for your toggling logic */
+body.dark-mode .themeIconMoon {
   opacity: 1;
 }
-
-.themeIcon.sun {
-  opacity: 1;
-}
-
-body.darkMode .themeIcon.moon {
-  opacity: 1;
-}
-
-body.darkMode .themeIcon.sun {
+body.dark-mode .themeIconSun {
   opacity: 0.3;
 }
 
+/* Chat interface area (below header) */
 .chatInterface {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  background-color: #12172b;
+  padding: 15px;
 }
 
+/* Scrollable messages area */
 .chatMessages {
   flex-grow: 1;
   overflow-y: auto;
   padding: 15px;
+  background-color: #0e1225;
+  border-radius: 8px;
+  color: #ffffff;
 }
 
+/* Each message line */
+.message {
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* Distinguish user/assistant messages if you want different styling */
+.user {
+  color: #ffd700; /* example color for user messages */
+}
+.assistant {
+  color: #ffffff; /* example color for assistant messages */
+}
+
+/* Input area at bottom */
 .chatInputArea {
   display: flex;
   padding: 15px;
-  border-top: 1px solid rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  background-color: #12172b;
 }
 
+/* The text area for the user input */
 #userInput {
   flex-grow: 1;
   margin-right: 10px;
   padding: 10px;
-  border: 1px solid var(--inputBorderLight);
+  border: 1px solid #ffaf40;
   border-radius: 8px;
+  background-color: #0e1225;
+  color: #ffffff;
   resize: none;
 }
 
-body.darkMode #userInput {
-  background-color: var(--inputBgDark);
-  border-color: var(--inputBorderDark);
-  color: var(--textDark);
-}
-
+/* The "Send" button */
 #sendMessage {
-  background: linear-gradient(135deg, var(--gradientStart), var(--gradientEnd));
+  background: linear-gradient(to right, #FF7F11, #FFD700);
   border: none;
   color: white;
   padding: 10px;
@@ -146,34 +137,8 @@ body.darkMode #userInput {
   cursor: pointer;
 }
 
+/* (Optional) Slight style for the SVG icon inside the button */
 #sendMessage svg {
   width: 24px;
   height: 24px;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 600px) {
-  .chatContainer {
-    width: 95%;
-    max-width: none;
-    min-height: 100vh;
-    border-radius: 0;
-  }
-}
-
-/* Landscape Mode */
-@media screen and (max-height: 500px) {
-  .chatContainer {
-    flex-direction: row;
-    max-height: 500px;
-  }
-
-  header {
-    width: 200px;
-    height: 100%;
-  }
-
-  .chatInterface {
-    flex-grow: 1;
-  }
 }

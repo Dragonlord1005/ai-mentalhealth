@@ -1,24 +1,29 @@
 import { component$, useStore, useSignal, $, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { v4 as uuidv4 } from "uuid";
+
+// Import your CSS module:
 import styles from "./chatbot.module.css";
 
-// Store chat history in a Map
+// --- Example: In-memory chat history store (for demonstration) ---
 const chatHistory = new Map();
 
-// Define the structure of the response chunk from Ollama API
 interface OllamaResponseChunk {
   response?: string;
 }
 
-// Function to fetch assistant's response from Ollama API
-const fetchAssistantResponse = server$(async function* (message, userId) {
+const fetchAssistantResponse = server$(async function* (message: string, userId: string) {
+  // Retrieve existing chat for this user or create a new one
   const chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: "user", content: message });
-  const prompt = chatData.messages.map((entry: { role: string; content: string }) => `${entry.role}: ${entry.content}`).join("\n");
+
+  // Build the prompt from chat history
+  const prompt = chatData.messages
+    .map((entry: { role: string; content: string }) => `${entry.role}: ${entry.content}`)
+    .join("\n");
 
   const ollamaApiUrl = "http://10.151.130.18:11434/api/generate";
-  console.log("Sending request to Ollama API with prompt:", prompt);
+
   const ollamaResponse = await fetch(ollamaApiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -69,11 +74,13 @@ export const ChatBot = component$(() => {
 
   const chatWindowRef = useSignal<HTMLDivElement>();
 
+  // Toggle theme example
   const toggleTheme = $(() => {
     state.darkMode = !state.darkMode;
     document.body.classList.toggle("dark-mode", state.darkMode);
   });
 
+  // Scroll to bottom whenever messages change
   useTask$(({ track }) => {
     track(() => state.messages);
     if (chatWindowRef.value) {
@@ -81,22 +88,31 @@ export const ChatBot = component$(() => {
     }
   });
 
+  // Send user message to the server function
   const sendMessage = $(async () => {
     if (state.input.trim() === "") return;
 
-    state.messages = [...state.messages, { role: "user", content: state.input }];
+    // Add user's message to UI
+    state.messages = [
+      ...state.messages,
+      { role: "user", content: state.input },
+    ];
     const userInput = state.input;
     state.input = "";
 
     try {
+      // Stream assistant response
       const responseStream = await fetchAssistantResponse(userInput, state.userId);
       let assistantMessage = "";
-      const assistantMessageIndex = state.messages.length;
-      state.messages = [...state.messages, { role: "assistant", content: assistantMessage }];
+      const assistantMsgIndex = state.messages.length;
+      // Preemptively add assistant entry with empty string
+      state.messages = [...state.messages, { role: "assistant", content: "" }];
 
       for await (const chunk of responseStream) {
         assistantMessage += chunk;
-        state.messages[assistantMessageIndex].content = assistantMessage;
+        // Update last message chunk-by-chunk
+        state.messages[assistantMsgIndex].content = assistantMessage;
+        // Force Qwik re-render
         state.messages = [...state.messages];
       }
     } catch (error) {
@@ -105,9 +121,10 @@ export const ChatBot = component$(() => {
   });
 
   return (
-    <div class={`${styles.chatContainer} ${state.darkMode ? styles.darkMode : ''}`}>
+    <div class={`${styles.chatContainer} ${state.darkMode ? styles.darkMode : ""}`}>
+      {/* Header */}
       <header>
-        <div class={styles.chatContainer}>
+        <div class={styles.logo}>
           <h1>Solace</h1>
           <div class={styles.themeToggle}>
             <input
@@ -125,10 +142,14 @@ export const ChatBot = component$(() => {
         </div>
       </header>
 
+      {/* Main chat area */}
       <main class={styles.chatInterface}>
         <div ref={chatWindowRef} class={styles.chatMessages}>
           {state.messages.map((message, index) => (
-            <div key={index} class={`${styles.message} ${styles[message.role]}`}>
+            <div
+              key={index}
+              class={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}
+            >
               <strong>{message.role}:</strong> {message.content}
             </div>
           ))}
@@ -136,15 +157,21 @@ export const ChatBot = component$(() => {
 
         <div class={styles.chatInputArea}>
           <textarea
-            value={state.input}
+            id="userInput"
             onInput$={(e) => (state.input = (e.target as HTMLTextAreaElement).value)}
             onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
+            value={state.input}
             placeholder="Type your message..."
-            rows={3}
-            class={styles.chatInput}
-          ></textarea>
-          <button onClick$={sendMessage} aria-label="Send Message">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            rows={2}
+          />
+          <button id="sendMessage" onClick$={sendMessage} aria-label="Send Message">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
             </svg>
           </button>
