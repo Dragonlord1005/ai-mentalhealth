@@ -3,10 +3,12 @@ import {
   useStore,
   $,
   useTask$,
-  useStylesScoped$,
+//   useStylesScoped$,
 } from "@builder.io/qwik";
-import { MdiMoonFull } from "./MoonFull";
-import { MdiWeatherSunny } from "./Sun";
+import styles from "./NewThemeToggle.module.css"
+import { MaterialSymbolsDarkModeOutlineRounded } from "./MaterialSymbolsDarkModeOutlineRounded"
+import { MaterialSymbolsSunnyOutlineRounded } from "./MaterialSymbolsSunnyOutlineRounded"
+
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: "light" });
 
@@ -29,26 +31,27 @@ export const ThemeToggle = component$(() => {
     }
   });
 
-  useStylesScoped$(`
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
-  `);
+//   useStylesScoped$(`
+//     .theme-toggle {
+//       display: flex;
+//       align-items: center;
+//       cursor: pointer;
+//     }
+//     .icon {
+//       width: 24px;
+//       height: 24px;
+//     }
+//   `);
 
   return (
-    <button onClick$={toggleTheme} class="theme-toggle">
+    <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle} type="button">  
       {store.theme === "dark" ? (
-        <MdiWeatherSunny class="icon" />
+        // <span class={styles.themeIcon}>☀️</span>
+        <MaterialSymbolsSunnyOutlineRounded height={36} width={36} class={styles.themeIcon} />
       ) : (
-        <MdiMoonFull class="icon" />
+        // <span class={styles.themeIcon}>🌙</span  >
+        <MaterialSymbolsDarkModeOutlineRounded height={36} width={36} class={styles.themeIcon} />
       )}
-      Toggle to {store.theme === "dark" ? "light" : "dark"} mode
     </button>
   );
 });
