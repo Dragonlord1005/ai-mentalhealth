@@ -13,11 +13,12 @@
 }
 
 .themeIcon {
-    font-size: 20px;
-    margin: 0 5px;
+    /* font-size: 20px; */
+    /* margin: 0 5px; */
+    /* Increase svg icon size */
+    width: 20px;
+    height: 20px;
     opacity: 1;
-    background: none;
-    border: none;
 }
 
 /* .themeIcon.moon {
