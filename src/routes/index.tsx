@@ -1,28 +1,22 @@
 import { component$ } from "@builder.io/qwik";
-import styles from "./chatbot.modules.css";
+import styles from "./chatbot.module.css";
 
 export default component$(() => {
   return (
-    <div class={'styles.chat-container'}>
-      <header>
-        <div class="logo">
-          <h1>Solace</h1>
-        </div>
-      </header>
-
-      <main class="chat-interface">
-        <div class="chat-messages" id="chatMessages">
+    <div class={styles.chatContainer}>
+      <main class={styles.chatInterface}>
+        <div class={styles.chatMessages} id="chatMessages">
           {/* Chat messages will be dynamically inserted here */}
         </div>
 
-        <div class="chat-input-area">
+        <div class={styles.chatInputArea}>
           <textarea
             id="userInput"
             placeholder="Type your message..."
             rows={3}
-            class="chat-input"
+            class={styles.chatInput}
           ></textarea>
-          <button id="sendMessage" aria-label="Send Message">
+          <button id="sendMessage" aria-label="Send Message" class={styles.sendMessageButton}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

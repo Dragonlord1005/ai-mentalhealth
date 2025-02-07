@@ -3,11 +3,11 @@ import {
   useStore,
   $,
   useTask$,
-//   useStylesScoped$,
+  //   useStylesScoped$,
 } from "@builder.io/qwik";
-import styles from "./NewThemeToggle.module.css"
-import { MaterialSymbolsDarkModeOutlineRounded } from "./MaterialSymbolsDarkModeOutlineRounded"
-import { MaterialSymbolsSunnyOutlineRounded } from "./MaterialSymbolsSunnyOutlineRounded"
+import styles from "./NewThemeToggle.module.css";
+import { MaterialSymbolsDarkModeOutlineRounded } from "./MaterialSymbolsDarkModeOutlineRounded";
+import { MaterialSymbolsSunnyOutlineRounded } from "./MaterialSymbolsSunnyOutlineRounded";
 
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: "light" });
@@ -31,26 +31,39 @@ export const ThemeToggle = component$(() => {
     }
   });
 
-//   useStylesScoped$(`
-//     .theme-toggle {
-//       display: flex;
-//       align-items: center;
-//       cursor: pointer;
-//     }
-//     .icon {
-//       width: 24px;
-//       height: 24px;
-//     }
-//   `);
+  //   useStylesScoped$(`
+  //     .theme-toggle {
+  //       display: flex;
+  //       align-items: center;
+  //       cursor: pointer;
+  //     }
+  //     .icon {
+  //       width: 24px;
+  //       height: 24px;
+  //     }
+  //   `);
 
   return (
-    <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle} type="button">  
+    <button
+      id="theme-toggle"
+      onClick$={toggleTheme}
+      class={styles.themeToggle}
+      type="button"
+    >
       {store.theme === "dark" ? (
         // <span class={styles.themeIcon}>☀️</span>
-        <MaterialSymbolsSunnyOutlineRounded height={36} width={36} class={styles.themeIcon} />
+        <MaterialSymbolsSunnyOutlineRounded
+          height={36}
+          width={36}
+          class={styles.themeIcon}
+        />
       ) : (
         // <span class={styles.themeIcon}>🌙</span  >
-        <MaterialSymbolsDarkModeOutlineRounded height={36} width={36} class={styles.themeIcon} />
+        <MaterialSymbolsDarkModeOutlineRounded
+          height={36}
+          width={36}
+          class={styles.themeIcon}
+        />
       )}
     </button>
   );
