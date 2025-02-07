@@ -1,5 +1,6 @@
 import { component$, useStore, $ } from "@builder.io/qwik";
 import { useStyles$ } from "@builder.io/qwik";
+import { ThemeToggle } from "~/components/ThemeToggle/NewThemeToggle";
 import styles from "./chatbot.css?inline";
 
 export default component$(() => {
@@ -17,7 +18,7 @@ export default component$(() => {
       <header>
         <div class="logo">
           <h1>Solace</h1>
-          <div class="theme-toggle">
+          {/* <div class="theme-toggle">
             <input
               type="checkbox"
               id="theme-switch"
@@ -29,7 +30,8 @@ export default component$(() => {
               <span class="theme-icon moon">🌙</span>
               <span class="theme-icon sun">☀️</span>
             </label>
-          </div>
+          </div> */}
+          <ThemeToggle />
         </div>
       </header>
 
