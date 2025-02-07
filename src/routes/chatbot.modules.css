@@ -16,7 +16,7 @@
 }
 
 /* Dark Mode */
-body.dark-mode .chat-container {
+body.dark-mode .chatContainer {
   background-color: var(--input-bg-dark);
   color: var(--text-dark);
 }
