@@ -1,0 +1,35 @@
+.theme-toggle {
+  position: relative;
+}
+
+.theme-switch {
+  display: none;
+}
+
+.theme-switch-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.theme-icon {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.theme-icon.moon {
+  opacity: 1;
+}
+
+.theme-icon.sun {
+  opacity: 1;
+}
+
+body.dark-mode .theme-icon.moon {
+  opacity: 1;
+}
+
+body.dark-mode .theme-icon.sun {
+  opacity: 0.3;
+}
+
