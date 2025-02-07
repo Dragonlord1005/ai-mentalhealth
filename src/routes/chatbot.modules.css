@@ -15,8 +15,7 @@
   color: var(--text-light);
 }
 
-/* Dark Mode */
-body.dark-mode .chatContainer {
+[data-theme="dark"] .chat-container {
   background-color: var(--input-bg-dark);
   color: var(--text-dark);
 }
@@ -63,6 +62,8 @@ header {
 .theme-icon.sun {
   opacity: 1;
 }
+
+
 
 body.dark-mode .theme-icon.moon {
   opacity: 1;
