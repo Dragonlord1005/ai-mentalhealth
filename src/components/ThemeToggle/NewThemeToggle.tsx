@@ -42,11 +42,11 @@ export const ThemeToggle = component$(() => {
 //   `);
 
   return (
-    <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle}>
+    <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle} type="button">  
       {store.theme === "dark" ? (
-        <span class={styles.sun}>☀️</span>
+        <span class={styles.themeIcon}>☀️</span>
       ) : (
-        <span class={styles.moon}>🌙</span  >
+        <span class={styles.themeIcon}>🌙</span  >
       )}
     </button>
   );
