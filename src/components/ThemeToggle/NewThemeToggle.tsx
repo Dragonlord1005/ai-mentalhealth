@@ -6,6 +6,8 @@ import {
 //   useStylesScoped$,
 } from "@builder.io/qwik";
 import styles from "./NewThemeToggle.module.css"
+import { MaterialSymbolsDarkModeOutlineRounded } from "./MaterialSymbolsDarkModeOutlineRounded"
+import { MaterialSymbolsSunnyOutlineRounded } from "./MaterialSymbolsSunnyOutlineRounded"
 
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: "light" });
@@ -44,9 +46,11 @@ export const ThemeToggle = component$(() => {
   return (
     <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle} type="button">  
       {store.theme === "dark" ? (
-        <span class={styles.themeIcon}>☀️</span>
+        // <span class={styles.themeIcon}>☀️</span>
+        <MaterialSymbolsSunnyOutlineRounded height={36} width={36} class={styles.themeIcon} />
       ) : (
-        <span class={styles.themeIcon}>🌙</span  >
+        // <span class={styles.themeIcon}>🌙</span  >
+        <MaterialSymbolsDarkModeOutlineRounded height={36} width={36} class={styles.themeIcon} />
       )}
     </button>
   );
