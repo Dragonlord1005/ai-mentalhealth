@@ -3,8 +3,9 @@ import {
   useStore,
   $,
   useTask$,
-  useStylesScoped$,
+//   useStylesScoped$,
 } from "@builder.io/qwik";
+import styles from "./NewThemeToggle.module.css"
 
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: "light" });
@@ -28,26 +29,25 @@ export const ThemeToggle = component$(() => {
     }
   });
 
-  useStylesScoped$(`
-    .theme-toggle {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
-  `);
+//   useStylesScoped$(`
+//     .theme-toggle {
+//       display: flex;
+//       align-items: center;
+//       cursor: pointer;
+//     }
+//     .icon {
+//       width: 24px;
+//       height: 24px;
+//     }
+//   `);
 
   return (
-    <button onClick$={toggleTheme} class="theme-toggle">
+    <button id="theme-toggle" onClick$={toggleTheme} class={styles.themeToggle}>
       {store.theme === "dark" ? (
-        <MdiWeatherSunny class="icon" />
+        <span class={styles.sun}>☀️</span>
       ) : (
-        <MdiMoonFull class="icon" />
+        <span class={styles.moon}>🌙</span  >
       )}
-      Toggle to {store.theme === "dark" ? "light" : "dark"} mode
     </button>
   );
 });
