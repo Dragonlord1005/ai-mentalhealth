@@ -1,13 +1,17 @@
 FROM node:20-alpine
 
-# Set working directory
+# Set absolute working directory
 WORKDIR /app
 
 # Install pnpm globally
 RUN npm install -g pnpm
 
-# Copy package.json and pnpm-lock.yaml first (leverage Docker cache)
-COPY package.json pnpm-lock.yaml ./
+# Approve build scripts for dependencies
+RUN pnpm approve-builds
+
+# Copy package.json, lockfile, and prisma schema before installation
+COPY package.json pnpm-lock.yaml ./ 
+COPY prisma ./prisma 
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -21,8 +25,8 @@ EXPOSE 3000
 # Set environment variable
 ENV NODE_ENV=production
 
-# Build the Server
-RUN pnpm build
+# Generate Prisma client
+RUN pnpm prisma generate
 
 # Start the Fastify server
 CMD ["pnpm", "serve"]
