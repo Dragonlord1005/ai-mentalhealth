@@ -76,20 +76,31 @@
 }
 
 /* The "Send" button */
-#sendMessage {
+.sendMessage {
   background: linear-gradient(to right, #FF7F11, #FFD700);
-  border: none;
+  border: 1em;
   color: white;
   padding: 10px;
   border-radius: 8px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
+  resize: none;
 }
 
 /* (Optional) Slight style for the SVG icon inside the button */
-#sendMessage svg {
+.sendMessage svg {
   width: 24px;
   height: 24px;
+}
+
+.sendButton {
+  background: linear-gradient(to right, #FF7F11, #FFD700);
+  border: 1em;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  margin: .3em;
+  cursor: pointer;
+  resize: none;
 }

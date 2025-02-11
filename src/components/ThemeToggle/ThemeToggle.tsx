@@ -39,7 +39,7 @@ export const ThemeToggle = component$(() => {
         // <MdiMoonFull class="icon" />
         <span class={styles.themeIconMoon}>🌙</span>
       )}
-      Toggle to {store.theme === "dark" ? "light" : "dark"} mode
+      {/* Toggle to {store.theme === "dark" ? "light" : "dark"} mode */}
     </button>
   );
 });

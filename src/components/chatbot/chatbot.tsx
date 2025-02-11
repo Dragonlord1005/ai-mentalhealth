@@ -1,6 +1,7 @@
 import { component$, useStore, useSignal, $, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { v4 as uuidv4 } from "uuid";
+import { Navbar } from "../Navbar/Navbar";
 
 // Import your CSS module:
 import styles from "./chatbot.module.css";
@@ -121,26 +122,8 @@ export const ChatBot = component$(() => {
   });
 
   return (
-    <div class={`${styles.chatContainer} ${state.darkMode ? styles.darkMode : ""}`}>
+    <div class={styles.chatContainer}>
       {/* Header */}
-      <header>
-        <div class={styles.logo}>
-          <h1>Solace</h1>
-          <div class={styles.themeToggle}>
-            <input
-              type="checkbox"
-              id="themeSwitch"
-              class={styles.themeSwitch}
-              checked={state.darkMode}
-              onClick$={toggleTheme}
-            />
-            <label for="themeSwitch" class={styles.themeSwitchLabel}>
-              <span class={styles.themeIconMoon}>🌙</span>
-              <span class={styles.themeIconSun}>☀️</span>
-            </label>
-          </div>
-        </div>
-      </header>
 
       {/* Main chat area */}
       <main class={styles.chatInterface}>
@@ -164,7 +147,7 @@ export const ChatBot = component$(() => {
             placeholder="Type your message..."
             rows={2}
           />
-          <button id="sendMessage" onClick$={sendMessage} aria-label="Send Message">
+          <button id="sendMessage" class={styles.sendButton} onClick$={sendMessage} aria-label="Send Message">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
