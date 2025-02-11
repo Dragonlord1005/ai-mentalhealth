@@ -2,9 +2,13 @@
 .chatContainer {
   width: 90vw;
   height: 95vh;
-  background: linear-gradient(to bottom, #FF7F11, #FFD700); /* Orange–gold vertical gradient */
+  background: linear-gradient(
+    to bottom,
+    #ff7f11,
+    #ffd700
+  ); /* Orange–gold vertical gradient */
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -16,59 +20,6 @@
    or just rely on body.dark-mode for theme switching */
 .darkMode {
   /* Example: Could invert some of the coloring, if desired. */
-}
-
-/* Top header area */
-header {
-  background: linear-gradient(to right, #FF7F11, #FFD700); /* Horizontal gradient */
-  padding: 15px;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-/* Logo/title on the left, theme toggle on the right */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Theme toggle container */
-.themeToggle {
-  position: relative;
-}
-
-/* Checkbox for the theme switch (hidden) */
-.themeSwitch {
-  display: none;
-}
-
-/* Label that acts as the visible toggle */
-.themeSwitchLabel {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.themeIconMoon,
-.themeIconSun {
-  font-size: 20px;
-  margin: 0 5px;
-  transition: opacity 0.3s ease;
-}
-
-/* Adjust these as desired for your toggling logic */
-body.dark-mode .themeIconMoon {
-  opacity: 1;
-}
-body.dark-mode .themeIconSun {
-  opacity: 0.3;
 }
 
 /* Chat interface area (below header) */
@@ -108,7 +59,7 @@ body.dark-mode .themeIconSun {
 .chatInputArea {
   display: flex;
   padding: 15px;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   background-color: #12172b;
   position: sticky;
   bottom: 0;
@@ -127,20 +78,31 @@ body.dark-mode .themeIconSun {
 }
 
 /* The "Send" button */
-#sendMessage {
-  background: linear-gradient(to right, #FF7F11, #FFD700);
-  border: none;
+.sendMessage {
+  background: linear-gradient(to right, #ff7f11, #ffd700);
+  border: 1em;
   color: white;
   padding: 10px;
   border-radius: 8px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
+  resize: none;
 }
 
 /* (Optional) Slight style for the SVG icon inside the button */
-#sendMessage svg {
+.sendMessage svg {
   width: 24px;
   height: 24px;
+}
+
+.sendButton {
+  background: linear-gradient(to right, #ff7f11, #ffd700);
+  border: 1em;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  margin: 0.3em;
+  cursor: pointer;
+  resize: none;
 }
