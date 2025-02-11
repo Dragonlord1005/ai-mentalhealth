@@ -1,30 +1,13 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+// import styles from './chatbot.module.css';
 import { ChatBot } from "~/components/chatbot/chatbot";
-import { ThemeToggle } from "~/components/ThemeToggle/ThemeToggle";
+import { Navbar } from "~/components/Navbar/Navbar";
 
 export default component$(() => {
   return (
-    <>
-      <ThemeToggle />
-      <div>
-        Welcome to the prototype of SOLUS ai!
-        <br />
-        Currently the model hasn't been trained, so it's a blank slate. Feel
-        free to ask it anything!
-      </div>
+    <div>
+      <Navbar />
       <ChatBot />
-    </>
+    </div>
   );
 });
-
-export const head: DocumentHead = {
-  title: "SOLUS ai",
-  meta: [
-    {
-      name: "description",
-      content:
-        "The prototype of SOLUS ai, a mental health LLM designed to assist people living with mental health conditions.",
-    },
-  ],
-};

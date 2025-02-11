@@ -1,34 +1,35 @@
 import { component$, useStore, useSignal, $, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { v4 as uuidv4 } from "uuid";
+
+// Import your CSS module:
 import styles from "./chatbot.module.css";
 
-// Store chat history in a Map
-const chatHistory = new Map<
-  string,
-  { userId: string; messages: { role: string; content: string }[] }
->();
+// --- Example: In-memory chat history store (for demonstration) ---
+const chatHistory = new Map();
 
-// Define the structure of the response chunk from Ollama API
 interface OllamaResponseChunk {
   response?: string;
 }
 
-// Function to fetch the assistant's response from the Ollama API using server$ streaming
 const fetchAssistantResponse = server$(async function* (
   message: string,
   userId: string,
 ) {
-  // Retrieve or initialize chat data for the user
+  // Retrieve existing chat for this user or create a new one
   const chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: "user", content: message });
+
+  // Build the prompt from chat history
   const prompt = chatData.messages
-    .map((entry) => `${entry.role}: ${entry.content}`)
+    .map(
+      (entry: { role: string; content: string }) =>
+        `${entry.role}: ${entry.content}`,
+    )
     .join("\n");
 
-  // Fetch response from Ollama API
   const ollamaApiUrl = "http://10.151.130.18:11434/api/generate";
-  console.log("Sending request to Ollama API with prompt:", prompt);
+
   const ollamaResponse = await fetch(ollamaApiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,12 +45,10 @@ const fetchAssistantResponse = server$(async function* (
     throw new Error("No response body from Ollama API");
   }
 
-  console.log("Received response from Ollama API");
   const reader = ollamaResponse.body.getReader();
   const decoder = new TextDecoder();
   let assistantMessage = "";
 
-  // Process the response stream
   let done = false;
   while (!done) {
     const { value, done: readerDone } = await reader.read();
@@ -57,7 +56,6 @@ const fetchAssistantResponse = server$(async function* (
     if (!value) break;
 
     const chunk = decoder.decode(value);
-    console.log("Received chunk:", chunk);
     const lines = chunk.split("\n").filter((line) => line.trim() !== "");
     for (const line of lines) {
       try {
@@ -72,24 +70,21 @@ const fetchAssistantResponse = server$(async function* (
     }
   }
 
-  // Update chat history with the assistant's response
   chatData.messages.push({ role: "assistant", content: assistantMessage });
   chatHistory.set(userId, chatData);
-
-  console.log("Assistant message:", assistantMessage);
 });
 
-// Define the ChatBot component
 export const ChatBot = component$(() => {
-  // Initialize component state
   const state = useStore({
     messages: [] as { role: "user" | "assistant"; content: string }[],
     input: "",
     userId: uuidv4(),
+    darkMode: false,
   });
 
   const chatWindowRef = useSignal<HTMLDivElement>();
 
+  // Scroll to bottom whenever messages change
   useTask$(({ track }) => {
     track(() => state.messages);
     if (chatWindowRef.value) {
@@ -97,11 +92,11 @@ export const ChatBot = component$(() => {
     }
   });
 
-  // Function to send a message
+  // Send user message to the server function
   const sendMessage = $(async () => {
     if (state.input.trim() === "") return;
 
-    // Add user's message to the state
+    // Add user's message to UI
     state.messages = [
       ...state.messages,
       { role: "user", content: state.input },
@@ -110,51 +105,72 @@ export const ChatBot = component$(() => {
     state.input = "";
 
     try {
-      // Fetch assistant's response
+      // Stream assistant response
       const responseStream = await fetchAssistantResponse(
         userInput,
         state.userId,
       );
       let assistantMessage = "";
-      const assistantMessageIndex = state.messages.length;
+      const assistantMsgIndex = state.messages.length;
+      // Preemptively add assistant entry with empty string
+      state.messages = [...state.messages, { role: "assistant", content: "" }];
 
-      // Add a placeholder for the assistant's message
-      state.messages = [
-        ...state.messages,
-        { role: "assistant", content: assistantMessage },
-      ];
-
-      // Process the response stream
       for await (const chunk of responseStream) {
-        console.log("Received chunk in client:", chunk);
         assistantMessage += chunk;
-        state.messages[assistantMessageIndex].content = assistantMessage;
-        state.messages = [...state.messages]; // Trigger reactivity
+        // Update last message chunk-by-chunk
+        state.messages[assistantMsgIndex].content = assistantMessage;
+        // Force Qwik re-render
+        state.messages = [...state.messages];
       }
     } catch (error) {
       console.error("Error:", error);
     }
   });
 
-  // Render the chat interface
   return (
-    <div>
-      <div ref={chatWindowRef} class={styles.chatWindow}>
-        {state.messages.map((message, index) => (
-          <div key={index} class={styles.message}>
-            <strong>{message.role}:</strong> {message.content}
-          </div>
-        ))}
-      </div>
+    <div class={styles.chatContainer}>
+      {/* Main chat area */}
+      <main class={styles.chatInterface}>
+        <div ref={chatWindowRef} class={styles.chatMessages}>
+          {state.messages.map((message, index) => (
+            <div
+              key={index}
+              class={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}
+            >
+              <strong>{message.role}:</strong> {message.content}
+            </div>
+          ))}
+        </div>
 
-      <input
-        value={state.input}
-        onInput$={(e) => (state.input = (e.target as HTMLInputElement).value)}
-        onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
-        placeholder="Type your message..."
-        type="text"
-      />
-      <button onClick$={() => sendMessage()}>Send</button>
+        <div class={styles.chatInputArea}>
+          <textarea
+            id="userInput"
+            onInput$={(e) =>
+              (state.input = (e.target as HTMLTextAreaElement).value)
+            }
+            onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
+            value={state.input}
+            placeholder="Type your message..."
+            rows={2}
+          />
+          <button
+            id="sendMessage"
+            class={styles.sendButton}
+            onClick$={sendMessage}
+            aria-label="Send Message"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </button>
+        </div>
+      </main>
     </div>
   );
 });
