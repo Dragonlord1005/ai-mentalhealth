@@ -1,15 +1,108 @@
-.chatWindow {
-  height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #242424;
-  padding: 10px;
-  margin-bottom: 10px;
+/* Container for everything */
+.chatContainer {
+  width: 90vw;
+  height: 95vh;
+  background: linear-gradient(
+    to bottom,
+    #ff7f11,
+    #ffd700
+  ); /* Orange–gold vertical gradient */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  max-width: 600px;
+  margin: auto; /* centers horizontally */
 }
 
+/* Toggle dark-mode class on the entire container if you like,
+   or just rely on body.dark-mode for theme switching */
+.darkMode {
+  /* Example: Could invert some of the coloring, if desired. */
+}
+
+/* Chat interface area (below header) */
+.chatInterface {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #12172b;
+  padding: 15px;
+}
+
+/* Scrollable messages area */
+.chatMessages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #0e1225;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+/* Each message line */
 .message {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
-input {
+/* Distinguish user/assistant messages if you want different styling */
+.user {
+  color: #ffd700; /* example color for user messages */
+}
+.assistant {
+  color: #ffffff; /* example color for assistant messages */
+}
+
+/* Input area at bottom */
+.chatInputArea {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #12172b;
+  position: sticky;
+  bottom: 0;
+}
+
+/* The text area for the user input */
+#userInput {
+  flex-grow: 1;
   margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ffaf40;
+  border-radius: 8px;
+  background-color: #0e1225;
+  color: #ffffff;
+  resize: none;
+}
+
+/* The "Send" button */
+.sendMessage {
+  background: linear-gradient(to right, #ff7f11, #ffd700);
+  border: 1em;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  cursor: pointer;
+  resize: none;
+}
+
+/* (Optional) Slight style for the SVG icon inside the button */
+.sendMessage svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sendButton {
+  background: linear-gradient(to right, #ff7f11, #ffd700);
+  border: 1em;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  margin: 0.3em;
+  cursor: pointer;
+  resize: none;
 }

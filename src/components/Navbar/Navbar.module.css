@@ -1,0 +1,24 @@
+/* Top header area */
+header {
+  background: linear-gradient(
+    to right,
+    #ff7f11,
+    #ffd700
+  ); /* Horizontal gradient */
+  padding: 15px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Logo/title on the left, theme toggle on the right */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
