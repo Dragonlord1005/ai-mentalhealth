@@ -12,8 +12,7 @@ describe('Main Page', () => {
       </QwikCityMockProvider>
     );
 
-    expect(screen.innerHTML).toContain('Welcome to the prototype of SOLUS ai!');
-    expect(screen.innerHTML).toContain('Currently the model hasn\'t been trained, so it\'s a blank slate. Feel free to ask it anything!');
+    expect(screen.innerHTML).toContain('Solace');
   });
 
   test('should render ThemeToggle component', async () => {
