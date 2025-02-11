@@ -1,6 +1,10 @@
 /* Top header area */
 header {
-  background: linear-gradient(to right, #FF7F11, #FFD700); /* Horizontal gradient */
+  background: linear-gradient(
+    to right,
+    #ff7f11,
+    #ffd700
+  ); /* Horizontal gradient */
   padding: 15px;
   color: white;
   font-size: 20px;

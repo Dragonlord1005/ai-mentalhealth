@@ -1,12 +1,7 @@
-import {
-  component$,
-  useStore,
-  $,
-  useTask$,
-} from "@builder.io/qwik";
+import { component$, useStore, $, useTask$ } from "@builder.io/qwik";
 // import { MdiMoonFull } from "./MoonFull";
 // import { MdiWeatherSunny } from "./Sun";
-import styles from "./ThemeToggle.module.css"
+import styles from "./ThemeToggle.module.css";
 
 export const ThemeToggle = component$(() => {
   const store = useStore({ theme: "light" });

@@ -12,14 +12,20 @@ interface OllamaResponseChunk {
   response?: string;
 }
 
-const fetchAssistantResponse = server$(async function* (message: string, userId: string) {
+const fetchAssistantResponse = server$(async function* (
+  message: string,
+  userId: string,
+) {
   // Retrieve existing chat for this user or create a new one
   const chatData = chatHistory.get(userId) || { userId, messages: [] };
   chatData.messages.push({ role: "user", content: message });
 
   // Build the prompt from chat history
   const prompt = chatData.messages
-    .map((entry: { role: string; content: string }) => `${entry.role}: ${entry.content}`)
+    .map(
+      (entry: { role: string; content: string }) =>
+        `${entry.role}: ${entry.content}`,
+    )
     .join("\n");
 
   const ollamaApiUrl = "http://10.151.130.18:11434/api/generate";
@@ -27,7 +33,11 @@ const fetchAssistantResponse = server$(async function* (message: string, userId:
   const ollamaResponse = await fetch(ollamaApiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "llama3.2", prompt, conversation: chatData.messages }),
+    body: JSON.stringify({
+      model: "llama3.2",
+      prompt,
+      conversation: chatData.messages,
+    }),
   });
 
   if (!ollamaResponse.body) {
@@ -96,7 +106,10 @@ export const ChatBot = component$(() => {
 
     try {
       // Stream assistant response
-      const responseStream = await fetchAssistantResponse(userInput, state.userId);
+      const responseStream = await fetchAssistantResponse(
+        userInput,
+        state.userId,
+      );
       let assistantMessage = "";
       const assistantMsgIndex = state.messages.length;
       // Preemptively add assistant entry with empty string
@@ -132,13 +145,20 @@ export const ChatBot = component$(() => {
         <div class={styles.chatInputArea}>
           <textarea
             id="userInput"
-            onInput$={(e) => (state.input = (e.target as HTMLTextAreaElement).value)}
+            onInput$={(e) =>
+              (state.input = (e.target as HTMLTextAreaElement).value)
+            }
             onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
             value={state.input}
             placeholder="Type your message..."
             rows={2}
           />
-          <button id="sendMessage" class={styles.sendButton} onClick$={sendMessage} aria-label="Send Message">
+          <button
+            id="sendMessage"
+            class={styles.sendButton}
+            onClick$={sendMessage}
+            aria-label="Send Message"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

@@ -2,9 +2,13 @@
 .chatContainer {
   width: 90vw;
   height: 95vh;
-  background: linear-gradient(to bottom, #FF7F11, #FFD700); /* Orange–gold vertical gradient */
+  background: linear-gradient(
+    to bottom,
+    #ff7f11,
+    #ffd700
+  ); /* Orange–gold vertical gradient */
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -17,8 +21,6 @@
 .darkMode {
   /* Example: Could invert some of the coloring, if desired. */
 }
-
-
 
 /* Chat interface area (below header) */
 .chatInterface {
@@ -57,7 +59,7 @@
 .chatInputArea {
   display: flex;
   padding: 15px;
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   background-color: #12172b;
   position: sticky;
   bottom: 0;
@@ -77,7 +79,7 @@
 
 /* The "Send" button */
 .sendMessage {
-  background: linear-gradient(to right, #FF7F11, #FFD700);
+  background: linear-gradient(to right, #ff7f11, #ffd700);
   border: 1em;
   color: white;
   padding: 10px;
@@ -94,13 +96,13 @@
 }
 
 .sendButton {
-  background: linear-gradient(to right, #FF7F11, #FFD700);
+  background: linear-gradient(to right, #ff7f11, #ffd700);
   border: 1em;
   color: white;
   padding: 10px;
   border-radius: 8px;
   display: flex;
-  margin: .3em;
+  margin: 0.3em;
   cursor: pointer;
   resize: none;
 }
