@@ -31,7 +31,7 @@ export const ThemeToggle = component$(() => {
   });
 
   return (
-    <button onClick$={toggleTheme} class="theme-toggle">
+    <button onClick$={toggleTheme} class={styles.themeToggle}>
       {store.theme === "dark" ? (
         // <MdiWeatherSunny class="icon" />
         <span class={styles.themeIconSun}>☀️</span>
