@@ -116,8 +116,6 @@ export const ChatBot = component$(() => {
 
   return (
     <div class={styles.chatContainer}>
-      {/* Header */}
-
       {/* Main chat area */}
       <main class={styles.chatInterface}>
         <div ref={chatWindowRef} class={styles.chatMessages}>
