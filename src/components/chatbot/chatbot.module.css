@@ -39,38 +39,6 @@ header {
   gap: 10px;
 }
 
-/* Theme toggle container */
-.themeToggle {
-  position: relative;
-}
-
-/* Checkbox for the theme switch (hidden) */
-.themeSwitch {
-  display: none;
-}
-
-/* Label that acts as the visible toggle */
-.themeSwitchLabel {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.themeIconMoon,
-.themeIconSun {
-  font-size: 20px;
-  margin: 0 5px;
-  transition: opacity 0.3s ease;
-}
-
-/* Adjust these as desired for your toggling logic */
-body.dark-mode .themeIconMoon {
-  opacity: 1;
-}
-body.dark-mode .themeIconSun {
-  opacity: 0.3;
-}
-
 /* Chat interface area (below header) */
 .chatInterface {
   flex-grow: 1;
