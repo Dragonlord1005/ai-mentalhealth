@@ -1,7 +1,6 @@
 import { component$, useStore, useSignal, $, useTask$ } from "@builder.io/qwik";
 import { server$ } from "@builder.io/qwik-city";
 import { v4 as uuidv4 } from "uuid";
-import { Navbar } from "../Navbar/Navbar";
 
 // Import your CSS module:
 import styles from "./chatbot.module.css";
@@ -74,12 +73,6 @@ export const ChatBot = component$(() => {
   });
 
   const chatWindowRef = useSignal<HTMLDivElement>();
-
-  // Toggle theme example
-  const toggleTheme = $(() => {
-    state.darkMode = !state.darkMode;
-    document.body.classList.toggle("dark-mode", state.darkMode);
-  });
 
   // Scroll to bottom whenever messages change
   useTask$(({ track }) => {
