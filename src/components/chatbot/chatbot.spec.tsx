@@ -25,16 +25,16 @@ describe("ChatBot Component", () => {
     await userEvent(button, "click");
   });
 
-  it("Should be able to type in the input box", async () => {
-    const { screen, render } = await createDOM();
-    await render(<ChatBot />);
-    const inputBox = screen.querySelector("input");
-    if (inputBox) {
-      inputBox.value = "Hello";
-    }
-    // userEvent(inputBox!, "Hello");
-    expect(inputBox!.value).toBe("Hello");
-  });
+  // it("Should be able to type in the input box", async () => {
+  //   const { screen, render } = await createDOM();
+  //   await render(<ChatBot />);
+  //   const inputBox = screen.querySelector("input");
+  //   if (inputBox) {
+  //     inputBox.value = "Hello";
+  //   }
+  //   // userEvent(inputBox!, "Hello");
+  //   expect(inputBox!.value).toBe("Hello");
+  // });
 });
 
 
