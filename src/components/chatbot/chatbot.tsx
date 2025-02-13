@@ -93,7 +93,8 @@ export const ChatBot = component$(() => {
   });
 
   // Send user message to the server function
-  const sendMessage = $(async () => {
+  const sendMessage = $(async (e?: Event) => {
+    if (e) e.preventDefault(); // Add this line to prevent default form submission behavior
     if (state.input.trim() === "") return;
 
     // Add user's message to UI
@@ -148,7 +149,7 @@ export const ChatBot = component$(() => {
             onInput$={(e) =>
               (state.input = (e.target as HTMLTextAreaElement).value)
             }
-            onKeyPress$={(e) => e.key === "Enter" && sendMessage()}
+            onKeyPress$={(e) => e.key === "Enter" && sendMessage(e)} // Pass event to sendMessage
             value={state.input}
             placeholder="Type your message..."
             rows={2}
